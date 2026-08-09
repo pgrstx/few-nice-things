@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>A Few Things I Kept — For Snigdha</title>
+<meta name="description" content="A tiny memory box for Snigdha. There isn't much in here yet. That's the point." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#eee8dc;--ink:#171612;--muted:#756f63;--line:rgba(23,22,18,.16);--red:#8f4037;--gold:#b18a4b;--night:#10100f;--card:#f6f0e5}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,sans-serif;overflow-x:hidden;cursor:none}button{font:inherit;color:inherit}a{text-decoration:none;color:inherit}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;z-index:100;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.7'/%3E%3C/svg%3E");opacity:.045;mix-blend-mode:multiply}
+#cursor{position:fixed;width:7px;height:7px;border-radius:50%;background:var(--ink);z-index:1000;pointer-events:none;transform:translate(-50%,-50%);transition:width .25s,height .25s,background .25s}#cursorRing{position:fixed;width:34px;height:34px;border:1px solid var(--ink);border-radius:50%;z-index:999;pointer-events:none;transform:translate(-50%,-50%);opacity:.5;transition:width .35s,height .35s,transform .08s ease-out}
+body.hovering #cursor{width:14px;height:14px}body.hovering #cursorRing{width:60px;height:60px;opacity:.25}
+#loading{position:fixed;inset:0;background:var(--night);color:var(--paper);z-index:9999;display:grid;place-items:center;transition:opacity 1s ease,visibility 1s}.loaded #loading{opacity:0;visibility:hidden}.loader{text-align:center}.loader .tiny{font:10px 'DM Mono',monospace;letter-spacing:.25em;text-transform:uppercase;color:#8c877d}.loader .count{font:clamp(70px,12vw,150px);font-family:'Playfair Display',serif;font-weight:400;margin-top:10px}
+#scene{min-height:100vh;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden;background:radial-gradient(circle at 50% 40%,#f8f2e7 0,#eee8dc 42%,#d9d0c0 100%)}
+.topbar{position:absolute;top:0;left:0;right:0;padding:28px 42px;display:flex;justify-content:space-between;z-index:20;font:10px 'DM Mono',monospace;letter-spacing:.17em;text-transform:uppercase}.topbar .right{color:var(--muted)}
+.intro{position:absolute;left:6vw;top:18vh;z-index:12;max-width:430px}.kicker{font:10px 'DM Mono',monospace;letter-spacing:.26em;text-transform:uppercase;color:var(--muted);margin-bottom:18px}.intro h1{font:clamp(42px,6.5vw,94px) 'Playfair Display',serif;line-height:.92;font-weight:500;letter-spacing:-.035em;margin:0}.intro h1 em{font-weight:400}.intro p{font-size:14px;line-height:1.75;color:var(--muted);max-width:350px;margin:28px 0 0}.intro .aside{margin-top:22px;font:10px/1.7 'DM Mono',monospace;color:#918a7d;text-transform:uppercase;letter-spacing:.08em}
+.tea-stage{position:relative;width:min(610px,68vw);height:min(610px,68vw);min-height:430px;display:grid;place-items:center;transform:translateY(5vh)}.halo{position:absolute;width:72%;height:72%;border-radius:50%;background:rgba(255,251,242,.45);filter:blur(2px);box-shadow:0 0 100px rgba(255,255,255,.4)}.table-shadow{position:absolute;width:70%;height:12%;bottom:14%;border-radius:50%;background:rgba(46,38,27,.18);filter:blur(18px);transform:scaleX(1.15)}
+.teapot-wrap{position:relative;width:68%;height:68%;z-index:8;filter:drop-shadow(0 30px 22px rgba(50,40,25,.15));transition:transform .7s cubic-bezier(.16,1,.3,1)}.tea-stage:hover .teapot-wrap{transform:translateY(-7px) rotate(-.7deg)}
+.teapot{position:absolute;left:14%;top:24%;width:65%;height:48%;border:3px solid #2a2822;border-radius:48% 44% 42% 46%;background:linear-gradient(145deg,#faf4e9 0,#ddd3c2 100%);box-shadow:inset -20px -18px 0 rgba(80,65,45,.08),inset 12px 8px 0 rgba(255,255,255,.7)}.tea-lid{position:absolute;left:28%;top:10%;width:38%;height:15%;border:3px solid #2a2822;border-radius:50%;background:#e9dfcf;transition:transform .55s cubic-bezier(.16,1,.3,1);transform-origin:70% 100%;z-index:4}.tea-lid:after{content:"";position:absolute;left:43%;top:-18px;width:24px;height:18px;border:3px solid #2a2822;border-radius:50% 50% 35% 35%;background:#eee6d8}.spout{position:absolute;right:-24%;top:27%;width:39%;height:25%;border:3px solid #2a2822;border-left:0;border-radius:10% 90% 90% 15%;transform:rotate(-20deg);background:linear-gradient(135deg,#f3ecdf,#d8ccba);z-index:-1}.handle{position:absolute;left:-17%;top:21%;width:38%;height:43%;border:3px solid #2a2822;border-radius:50%;background:transparent;box-shadow:inset 0 0 0 14px #eee6d8;z-index:-1}.tea-detail{position:absolute;left:20%;right:15%;top:45%;height:2px;background:rgba(42,40,34,.25)}.tea-dot{position:absolute;width:7px;height:7px;border-radius:50%;background:#a98b62;left:34%;top:53%;box-shadow:35px 7px #a98b62,70px -3px #a98b62,105px 9px #a98b62}
+.steam{position:absolute;left:46%;top:-7%;width:18%;height:24%;opacity:0;z-index:5}.steam span{position:absolute;width:18px;height:70px;border-left:2px solid rgba(80,70,55,.3);border-radius:50%;animation:steam 3.2s ease-in-out infinite}.steam span:nth-child(1){left:8px}.steam span:nth-child(2){left:32px;animation-delay:.8s}.steam span:nth-child(3){left:52px;animation-delay:1.5s}@keyframes steam{0%{transform:translateY(25px) scale(.8);opacity:0}30%{opacity:.7}100%{transform:translateY(-80px) scale(1.15);opacity:0}}
+.tea-stage.opening .tea-lid{transform:translate(18px,-22px) rotate(17deg)}.tea-stage.opening .steam{opacity:1}.tea-stage.opening .teapot-wrap{transform:translateY(-5px) scale(1.02)}
+.open-label{position:absolute;bottom:7%;left:50%;transform:translateX(-50%);z-index:15;text-align:center}.open-label button{border:0;background:none;cursor:none;font:11px 'DM Mono',monospace;letter-spacing:.22em;text-transform:uppercase;padding:14px 20px}.open-label button:after{content:"";display:block;height:1px;background:var(--ink);transform:scaleX(.25);transform-origin:center;margin-top:8px;transition:transform .35s}.open-label button:hover:after{transform:scaleX(1)}.open-label small{display:block;font:9px 'DM Mono',monospace;color:var(--muted);letter-spacing:.1em;margin-top:6px}
+.scrollhint{position:absolute;bottom:25px;left:50%;transform:translateX(-50%);font:9px 'DM Mono',monospace;letter-spacing:.2em;color:#938b7d;text-transform:uppercase;animation:bob 2.2s ease-in-out infinite}@keyframes bob{50%{transform:translate(-50%,5px)}}
+.corner{position:absolute;right:6vw;top:34%;writing-mode:vertical-rl;font:9px 'DM Mono',monospace;letter-spacing:.22em;color:#928a7c;text-transform:uppercase}
+#memoryView{position:fixed;inset:0;background:#0d0c0a;z-index:500;display:none;opacity:0;transition:opacity .45s}.memory-open #memoryView{display:block}.memory-open.memory-visible #memoryView{opacity:1}.memory-shell{height:100%;overflow:auto;padding:70px 6vw 80px;display:grid;grid-template-columns:minmax(250px,40%) 1fr;gap:7vw;align-items:center;color:var(--paper)}.memory-index{font:10px 'DM Mono',monospace;color:#8d877c;letter-spacing:.18em;text-transform:uppercase;margin-bottom:25px}.memory-title{font:clamp(42px,6vw,88px) 'Playfair Display',serif;font-weight:400;line-height:.95;margin:0 0 28px}.memory-title em{font-style:italic}.memory-copy{font-size:15px;line-height:1.9;color:#c1b9ab;max-width:560px;overflow-wrap:break-word}.memory-copy strong{color:var(--paper);font-weight:500}.memory-foot{margin-top:34px;font:10px/1.8 'DM Mono',monospace;color:#777064;text-transform:uppercase;letter-spacing:.08em}.memory-close{position:fixed;right:34px;top:calc(27px + env(safe-area-inset-top,0px));border:0;background:none;color:#aaa294;font:10px 'DM Mono',monospace;letter-spacing:.18em;text-transform:uppercase;cursor:none;padding:6px}.memory-close:hover{color:#fff}.memory-object{position:relative;min-height:430px;display:grid;place-items:center;perspective:1000px}.paper{width:min(440px,80vw);min-height:300px;background:#e9dfce;color:#27231d;padding:42px;box-shadow:0 25px 70px rgba(0,0,0,.35);transform:rotate(-2deg);position:relative;overflow-wrap:break-word}.paper:before{content:"";position:absolute;inset:12px;border:1px solid rgba(39,35,29,.2);pointer-events:none}.paper .mono{font:9px 'DM Mono',monospace;letter-spacing:.15em;color:#756d60;text-transform:uppercase}.paper h3{font:34px 'Playfair Display',serif;font-weight:500;line-height:1;margin:28px 0 18px}.paper p{font:13px/1.8 'Inter',sans-serif;color:#514a40}.paper .stamp{display:inline-block;margin-top:22px;border:1px solid #8d3e35;color:#8d3e35;padding:6px 9px;font:9px 'DM Mono',monospace;letter-spacing:.12em;transform:rotate(-4deg)}.polaroid{width:360px;max-width:80vw;background:#f6f1e7;padding:15px 15px 56px;box-shadow:0 30px 70px rgba(0,0,0,.4);transform:rotate(3deg)}.polaroid .fake-photo{height:290px;background:linear-gradient(135deg,#7f8b85,#d4c3a4 48%,#53605e);position:relative;overflow:hidden}.fake-photo:after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.45),transparent 28%),linear-gradient(145deg,transparent 40%,rgba(0,0,0,.22));mix-blend-mode:screen;pointer-events:none}.polaroid .caption{font:11px 'DM Mono',monospace;margin-top:16px;color:#4d473e}.receipt{width:min(430px,80vw);background:#f0eadf;color:#26231e;padding:36px 34px;box-shadow:0 30px 70px rgba(0,0,0,.4);transform:rotate(-1deg);font-family:'DM Mono',monospace}.receipt .rhead{text-align:center;border-bottom:1px dashed #aaa195;padding-bottom:20px}.receipt .rhead strong{font-size:19px}.receipt table{width:100%;margin-top:20px;border-collapse:collapse;font-size:10px}.receipt td{padding:10px 0;border-bottom:1px dashed #b9b0a3}.receipt td:last-child{text-align:right}.receipt .total{display:flex;justify-content:space-between;font-size:13px;font-weight:500;padding-top:16px}.tape{width:420px;max-width:80vw;height:245px;background:#d7cbb9;border:1px solid #a69b8a;box-shadow:0 30px 70px rgba(0,0,0,.4);padding:30px;transform:rotate(2deg);position:relative}.tape:before,.tape:after{content:"";position:absolute;top:75px;width:78px;height:78px;border-radius:50%;border:8px solid #4a4740;background:#c9bdab;box-shadow:inset 0 0 0 8px #eee5d7}.tape:before{left:60px}.tape:after{right:60px}.tape .label{position:absolute;left:125px;right:125px;top:55px;height:115px;background:#efe8dc;border:1px solid #b7ae9f;padding:16px}.tape .label span{font:9px 'DM Mono',monospace;color:#736c61;letter-spacing:.12em}.tape .label h4{font:21px 'Playfair Display',serif;font-weight:500;margin:10px 0}.play{position:absolute;left:50%;bottom:25px;transform:translateX(-50%);border:1px solid #777064;background:transparent;padding:9px 15px;font:9px 'DM Mono',monospace;letter-spacing:.1em;cursor:none}.play:hover{background:#26231e;color:#eee8dc}
+.memory-nav{position:fixed;bottom:25px;left:6vw;right:6vw;display:flex;justify-content:space-between;align-items:center;z-index:510;font:9px 'DM Mono',monospace;letter-spacing:.15em;color:#777064;text-transform:uppercase}.memory-nav button{background:none;border:0;color:#a9a194;cursor:none;font:inherit}.memory-nav button:hover{color:white}.memory-dots{display:flex;gap:7px}.memory-dots i{width:5px;height:5px;border:1px solid #777064;border-radius:50%;display:block}.memory-dots i.active{background:#d8cdbd;border-color:#d8cdbd}
+#after{min-height:100vh;padding:130px 8vw;background:#171612;color:var(--paper);position:relative;overflow:hidden}.after-inner{max-width:900px;margin:auto}.after-kicker{font:10px 'DM Mono',monospace;color:#837c70;letter-spacing:.25em;text-transform:uppercase}#after h2{font:clamp(52px,9vw,130px) 'Playfair Display',serif;font-weight:400;line-height:.88;margin:28px 0 55px;letter-spacing:-.04em}#after h2 em{font-style:italic}#after p{font-size:17px;line-height:1.9;color:#bdb5a8;max-width:650px}#after .signature{margin-top:70px;font:10px/1.8 'DM Mono',monospace;color:#716b60;letter-spacing:.1em;text-transform:uppercase}.office-note{margin:90px 0 20px;padding-top:25px;border-top:1px solid rgba(238,232,220,.15);font:11px/1.85 'DM Mono',monospace;color:#8c8577;max-width:560px}.office-note span{color:#cfc6b7}
+#archive{padding:100px 6vw 130px;background:var(--paper);border-top:1px solid var(--line)}.archive-head{display:flex;justify-content:space-between;align-items:end;border-bottom:1px solid var(--line);padding-bottom:24px}.archive-head h3{font:34px 'Playfair Display',serif;font-weight:500;margin:0}.archive-head p{font:9px 'DM Mono',monospace;color:var(--muted);letter-spacing:.15em;text-transform:uppercase}.archive-grid{display:grid;grid-template-columns:repeat(4,1fr);border-left:1px solid var(--line);margin-top:0}.archive-item{padding:28px 22px;min-height:170px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);cursor:none;transition:background .3s,transform .3s}.archive-item:hover{background:#e4ddcf;transform:translateY(-3px)}.archive-num{font:9px 'DM Mono',monospace;color:var(--muted)}.archive-item h4{font:22px 'Playfair Display',serif;font-weight:500;margin:25px 0 8px}.archive-item p{font-size:11px;line-height:1.6;color:var(--muted);margin:0}.footer{background:#11110f;color:#706a60;padding:25px 6vw;display:flex;justify-content:space-between;font:9px 'DM Mono',monospace;letter-spacing:.12em;text-transform:uppercase}.footer strong{color:#b9b0a3;font-weight:400}
+.reveal{opacity:0;transform:translateY(25px);transition:opacity .9s,transform .9s}.reveal.on{opacity:1;transform:none}
+@media(max-width:900px){body{cursor:auto}#cursor,#cursorRing{display:none}.open-label button,.memory-close,.archive-item,.play,button{cursor:pointer}.topbar{padding:calc(20px + env(safe-area-inset-top,0px)) 20px 16px;flex-wrap:wrap;gap:6px 14px}.topbar div{font-size:9px}#scene{flex-direction:column;padding-bottom:40px}.intro{position:relative;left:auto;top:auto;align-self:flex-start;margin:100px 22px 0;z-index:15;max-width:none}.intro h1{font-size:clamp(38px,10vw,52px)}.intro p{font-size:13px;max-width:none}.tea-stage{width:92vw;height:92vw;min-height:380px;transform:none;margin:10px auto -10px}.corner{display:none}.open-label{bottom:4%}.scrollhint{display:none}.memory-shell{grid-template-columns:1fr;align-content:start;padding:calc(90px + env(safe-area-inset-top,0px)) 6vw 40px;gap:26px}.memory-object{order:-1;min-height:auto;width:100%}.memory-title{font-size:clamp(34px,9vw,60px)}.memory-copy{font-size:14px;max-width:none}.memory-nav{left:20px;right:20px;bottom:calc(18px + env(safe-area-inset-bottom,0px))}.archive-grid{grid-template-columns:repeat(2,1fr)}#archive{padding:70px 6vw 90px}#after{padding:90px 7vw}.footer{flex-direction:column;gap:12px;padding:20px 6vw calc(20px + env(safe-area-inset-bottom,0px))}}
+@media(max-width:520px){.archive-grid{grid-template-columns:1fr}.archive-head{display:block}.archive-head p{margin-top:12px}.polaroid{width:100%;max-width:320px}.fake-photo{height:235px!important}.tape{width:100%;height:220px}.tape:before,.tape:after{width:62px;height:62px;top:72px}.tape:before{left:45px}.tape:after{right:45px}.tape .label{left:98px;right:98px;top:48px;height:105px}.paper,.receipt{padding:24px;width:100%;max-width:360px}.memory-title{font-size:38px}.intro h1{font-size:36px}#after h2{font-size:clamp(38px,11vw,64px)}}
+@media(max-width:380px){.topbar div{font-size:8px;letter-spacing:.12em}.intro h1{font-size:32px}.kicker{font-size:9px;margin-bottom:12px}.open-label button{font-size:10px;padding:12px 16px}.memory-title{font-size:32px}.archive-item{padding:20px 16px;min-height:150px}.archive-item h4{font-size:19px}}
+</style>
+</head>
+<body>
+<div id="loading"><div class="loader"><div class="tiny">opening something small</div><div class="count" id="loadCount">00</div></div></div>
+<div id="cursor"></div><div id="cursorRing"></div>
+
+<section id="scene">
+  <div class="topbar"><div>A FEW THINGS I KEPT</div><div class="right">09 · 08 · 26 / for singhada</div></div>
+  <div class="intro reveal">
+    <div class="kicker">a very small archive</div>
+    <h1>There isn't<br>much in here.<br><em>But it's your b'day.</em></h1>
+    <p>We've only just met. So I couldn't exactly fill the teapot with ten years of stories. So I started kind of early.</p>
+    <div class="aside">open the teapot · take your time · no senti<br>(that last part might be a lie)</div>
+  </div>
+  <div class="tea-stage" id="teaStage">
+    <div class="halo"></div><div class="table-shadow"></div>
+    <div class="teapot-wrap">
+      <div class="steam"><span></span><span></span><span></span></div>
+      <div class="handle"></div><div class="spout"></div>
+      <div class="teapot"><div class="tea-detail"></div><div class="tea-dot"></div></div>
+      <div class="tea-lid"></div>
+    </div>
+    <div class="open-label"><button id="openTea">OPEN THE BOX</button><small>there are 10 things inside</small></div>
+  </div>
+  <div class="corner">freaking happy birthday snigddha</div>
+  <div class="scrollhint">there's more below ↓</div>
+</section>
+
+<section id="after">
+  <div class="after-inner">
+    <div class="after-kicker">You are so fun to talk to</div>
+    <h2>Maybe thats why the best<br>part is that<br><em>it isn't full yet.</em></h2>
+    <p>Just a few conversations, some extremely unnecessary investigations, a suspicious amount of voice notes, and the beginnings of knowing someone.</p>
+    <p>It's not much. But every single thing in here made me laugh, and most of it made me like you more — which either means this is a very good archive, or I'm just very easy to win over where it is about you. I'm going to go ahead and assume both.</p>
+    <p>Which is kind of nice, honestly. There's still room. I'm hoping you help me fill it.</p>
+    <p>PS- I'm very clingy sorry.</p>
+    <div class="signature">Happy Birthday, Singhada.<br>— Pranav</div>
+    <div class="office-note"><span>one last thing —</span><br>You once agreed to be Oyela, my entirely fictional girlfriend.
+A completely unnecessary lie.
+A ridiculous premise.
+And somehow, you committed to the character.
+I think that was when I realised that talking to you was probably going to be a little more fun than I had planned.
+Anyway.
+Oyela was fictional.
+This birthday isn’t.
+Happy birthday, Snigddha.</div>
+  </div>
+</section>
+
+<section id="archive">
+  <div class="archive-head"><h3>The little index</h3><p>14 pieces · 0 forced nostalgia</p></div>
+  <div class="archive-grid" id="archiveGrid"></div>
+</section>
+<div class="footer"><div>made carefully, mostly at 2 AM, with zero regrets</div><div><strong>for singhada</strong> · vol. 01 · vol. 02 pending</div></div>
+
+<div id="memoryView" aria-hidden="true">
+  <button class="memory-close" id="closeMemory">[ close box ]</button>
+  <div class="memory-shell">
+    <div class="memory-text"><div class="memory-index" id="mIndex"></div><h2 class="memory-title" id="mTitle"></h2><div class="memory-copy" id="mCopy"></div><div class="memory-foot" id="mFoot"></div></div>
+    <div class="memory-object" id="mObject"></div>
+  </div>
+  <div class="memory-nav"><button id="prevMemory">← previous</button><div class="memory-dots" id="dots"></div><button id="nextMemory">next →</button></div>
+</div>
+<script>
+const memories = [
+  {
+    id: '01',
+    title: 'Day Zero',
+    kind: 'paper',
+    short: 'A Hinge match, an Instagram deep-dive, and a nickname that stuck on the first try.',
+    copy: `<p>We matched on Hinge. Within about four minutes we had both migrated to Instagram, because apparently that is simply how it's done now — you called it <em>"kabristan of hinge matches,"</em> and you were not wrong.</p><p>What followed was forty straight minutes of scrolling through each other's entire back-catalogue of stories, complimenting outfits, interrogating majors, and generally behaving like two people with nowhere else to be.</p><p>Somewhere around message forty I decided your name was going to be <strong>Singhada</strong>. You objected for exactly one message. Then you gave up. It has been that way since — and it was, if I'm honest, the first time in that entire conversation I caught myself smiling at my phone like an idiot.</p>`,
+    foot: '28 JUL 2026 · 09:38 → 10:13 · the actual beginning, filed late'
+  },
+  {
+    id: '02',
+    title: 'The 7 AM Incident',
+    kind: 'paper',
+    short: 'A promise. An alarm. A spectacular failure.',
+    copy: `<p>I said I would be awake at 7. I had a whole plan. Alarm. Phone. Everything.</p><p>At <strong>10:39 AM</strong>, I woke up and sent approximately the most dignified sequence of messages ever recorded.</p><p>You, meanwhile, had already decided: <em>"I knew ki aap se na ho paayega putr."</em></p><p>Then you corrected the spelling of your own name before I could recover. Small detail I didn't mention at the time: I wasn't actually annoyed at myself for oversleeping. I was annoyed I'd missed the chance to be the first thing you read that morning.</p>`,
+    foot: '30 JUL 2026 · 01:36 → 12:05 · evidence: one extremely guilty good-morning text'
+  },
+  {
+    id: '03',
+    title: 'The Name Situation',
+    kind: 'paper',
+    short: 'Singhada. Snigddha. Snigdha. Apparently.',
+    copy: `<p>I have learned that your name has become a small administrative crisis in my phone.</p><p>Every time I get it wrong, you appear like an editor returning a manuscript covered in red ink:</p><p><strong>"Snigddha*******"</strong></p><p>At this point I feel like the spelling itself is a recurring character. I'll probably keep getting it wrong. You'll probably keep correcting me. I've decided I genuinely don't mind being edited by you.</p>`,
+    foot: '30 JUL 2026 · spelling remains under active investigation'
+  },
+  {
+    id: '04',
+    title: 'Sarojini In The Humidity',
+    kind: 'receipt',
+    short: 'Shopping, sweating profoundly, and a strict no-bad-purchases policy.',
+    copy: `<p>You were at Sarojini. It was humid. You were waiting for your maasi.</p><p>I gave you the only responsible advice available:</p><p><strong>only buy shit you will actually wear, dumbo.</strong></p><p>Then I demanded a haul. You provided no satisfactory dress haul. This archive considers that an unresolved matter. For the record, I wasn't actually worried about your shopping choices. I just wanted an excuse to keep texting you in the middle of a Wednesday.</p>`,
+    foot: '30 JUL 2026 · 16:03 → 17:36 · complaint filed',
+    object: {
+      header: 'SAROJINI INCIDENT',
+      subtitle: 'UNOFFICIAL RECEIPT · 30.07.26',
+      rows: [['humidity', '100%'], ['maasi waiting', '1'], ['bad purchases', '0*'], ['dress haul', '0']],
+      status: 'UNRESOLVED'
+    }
+  },
+  {
+    id: '05',
+    title: 'Too Many Voice Notes',
+    kind: 'tape',
+    short: 'One conversation became eleven audio messages. You listened to all of it.',
+    copy: `<p>At some point I stopped sending messages and started sending voice notes.</p><p>Then I sent another.</p><p>Then another.</p><p>Then, at <strong>3:25 AM</strong>, apparently still had something to say.</p><p>The next morning you were literally in the metro and said:</p><p><strong>"BUT I ENJOYED HEARING ALL OF IT."</strong></p><p>That was probably the moment this box became necessary — the moment I realised you'd actually rather listen to me ramble at 3 AM than not hear from me at all.</p>`,
+    foot: '30 JUL → 31 JUL 2026 · audio archive · one listener who voluntarily stayed',
+    object: {
+      side: 'AUDIO ARCHIVE · SIDE A',
+      tapeTitle: 'Too Many Voice Notes',
+      dateRange: '30 JUL → 31 JUL · 3:25 AM'
+    }
+  },
+  {
+    id: '06',
+    title: 'The Other Pranav',
+    kind: 'polaroid',
+    short: 'South Ex McDonald’s. One stranger. Unreasonably similar eyes.',
+    copy: `<p>You were at McDonald's when you suddenly became convinced there was a Pranav duplicate sitting nearby.</p><p>"THE RESEMBLANCE IS UNCANNY."</p><p>I demanded photographic evidence. You refused because, apparently, <em>"aise thodi."</em></p><p>Then you found the video anyway.</p><p>I maintained that we looked nothing alike. You maintained the opposite. The case remains open. For what it's worth, I've decided I don't actually mind losing this argument — it means you were looking closely enough at some stranger's face to think of mine.</p>`,
+    foot: '31 JUL 2026 · 15:09 → 15:23 · CASE STATUS: unresolved'
+  },
+  {
+    id: '07',
+    title: 'The Library Detour',
+    kind: 'paper',
+    short: 'A random trip, a British library, and a thought I probably should have kept to myself.',
+    copy: `<p>On an impromptu trip I ended up walking around Dehradun/Mussoorie, getting a lift from a random local, and hearing about a library.</p><p>And apparently my immediate thought was: <strong>"I should send her a picture of this."</strong></p><p>Because by then I had started noticing the sort of places you might like. Not the sort of thing I usually do on a random Tuesday. I noticed it happening anyway.</p><p>That is a very small thing. I kept it anyway.</p>`,
+    foot: '03 AUG 2026 · 02:36 · filed under: things I noticed'
+  },
+  {
+    id: '08',
+    title: 'The Snake Uncle Trauma',
+    kind: 'paper',
+    short: 'An uncle, a childhood warning, and a lifelong refusal to use train washrooms.',
+    copy: `<p>Completely unprompted, I told you that some uncle once informed child-me that train washrooms have snakes in them.</p><p><strong>"That shit doesn't leave my brain. It haunts me."</strong> You asked, reasonably, which trains I'd been travelling on. I did not have an answer.</p><p>The conclusion, stated with total conviction: <em>"I will never use washroom in trains."</em> No further evidence was offered. None was needed. You didn't laugh at me for it, either — you just filed it away, very seriously, as a fact about me. I liked that more than I probably should have.</p>`,
+    foot: '04 AUG 2026 · 19:47 → 20:16 · status: permanently traumatised'
+  },
+  {
+    id: '09',
+    title: 'The Movie Ticket That Wasn\'t',
+    kind: 'ticket',
+    short: 'Spider-Man. Two tickets in theory. One person in practice.',
+    copy: `<p>There was a movie we both wanted to see.</p><p>You said you were going alone.</p><p>I said I wanted to go too.</p><p>Then life did what it does, and I eventually went to watch Spider-Man <strong>alone</strong>.</p><p>Still counts as a memory. Just a slightly badly scheduled one. Consider this an open invitation for a rewatch — same movie, two tickets, actually two people this time.</p>`,
+    foot: '03 AUG 2026 · 19:46 · admission: one · sequel: pending',
+    object: {
+      archiveLabel: 'CINEMA',
+      archiveNum: 'EXHIBIT 13',
+      filmTitle: 'SPIDER-MAN',
+      lines: [['Tickets', '2 in theory'], ['People attending', '1']],
+      reason: 'Reason: scheduling is apparently a skill.',
+      stamp: 'ADMIT ONE*'
+    }
+  },
+  {
+    id: '10',
+    title: 'The Height Negotiation',
+    kind: 'receipt',
+    short: 'A very official audit of my height, conducted by someone who likes heels.',
+    copy: `<p>You asked how tall I am. I said six feet, with the confidence of a man who has never actually measured himself.</p><p>You saw through it instantly: <strong>"Are you one of the 5'11 guys who hasn't measured himself but thinks he's 6'0?"</strong> I had no defence. I offered height extenders instead.</p><p>Final ruling, delivered without mercy: <em>"height was not a dealbreaker before, phir bahut kata, so now it kinda is."</em> Noted. Filed. Mildly panicking. For what it's worth — dealbreaker or not — I'd still rather be teased by you than complimented by literally anyone else.</p>`,
+    foot: '05 AUG 2026 · 08:48 → 08:55 · audit status: ongoing, unfavourable',
+    object: {
+      header: 'HEIGHT AUDIT',
+      subtitle: 'UNOFFICIAL RECEIPT · 05.08.26',
+      rows: [['claimed height', "6'0"], ['actually measured', 'never'], ['height extenders', 'under consideration'], ['ego', 'bruised']],
+      status: 'UNVERIFIED'
+    }
+  }
+];
+const teaStage=document.getElementById('teaStage'), openTea=document.getElementById('openTea'), view=document.getElementById('memoryView');let current=0;
+function sound(type='click'){try{const c=new (window.AudioContext||window.webkitAudioContext)();const o=c.createOscillator(),g=c.createGain();o.type='sine';o.frequency.value=type==='open'?185:320;g.gain.setValueAtTime(.0001,c.currentTime);g.gain.exponentialRampToValueAtTime(.045,c.currentTime+.01);g.gain.exponentialRampToValueAtTime(.0001,c.currentTime+.16);o.connect(g);g.connect(c.destination);o.start();o.stop(c.currentTime+.17)}catch(e){}}
+function objectHTML(m){const o=m.object||{};
+if(m.kind==='paper')return `<div class="paper"><div class="mono">${o.archiveLabel||'PRIVATE ARCHIVE'} · ${m.id}</div><h3>${m.title}</h3><p>${m.short}</p><span class="stamp">${o.stamp||'KEPT'}</span></div>`;
+if(m.kind==='receipt')return `<div class="receipt"><div class="rhead"><strong>${o.header||m.title.toUpperCase()}</strong><br><span>${o.subtitle||''}</span></div><table>${(o.rows||[]).map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td></tr>`).join('')}</table><div class="total"><span>STATUS</span><span>${o.status||'UNRESOLVED'}</span></div></div>`;
+if(m.kind==='polaroid')return `<div class="polaroid"><div class="fake-photo"></div><div class="caption">${m.id} · ${m.title}</div></div>`;
+if(m.kind==='tape')return `<div class="tape"><div class="label"><span>${o.side||'AUDIO ARCHIVE · SIDE A'}</span><h4>${o.tapeTitle||m.title}</h4><span>${o.dateRange||''}</span></div><button class="play" onclick="this.textContent='PLAYING · ★'; sound('open')">▶ PLAY</button></div>`;
+if(m.kind==='video')return `<div class="polaroid"><video class="fake-photo" style="width:100%;object-fit:cover;display:block" src="${o.file}" controls playsinline></video><div class="caption">${m.id} · ${m.title}</div></div>`;
+return `<div class="paper" style="transform:rotate(1.5deg)"><div class="mono">${o.archiveLabel||'EXHIBIT'} · ${o.archiveNum||m.id}</div><h3>${o.filmTitle||m.title}</h3><p>${(o.lines||[]).map(l=>`${l[0]}: <strong>${l[1]}</strong>`).join('<br>')}<br><br>${o.reason||''}</p><span class="stamp">${o.stamp||'KEPT'}</span></div>`}
+function renderMemory(){const m=memories[current];document.getElementById('mIndex').textContent=`MEMORY ${m.id} / ${memories.length}`;document.getElementById('mTitle').innerHTML=m.title;document.getElementById('mCopy').innerHTML=m.copy;document.getElementById('mFoot').textContent=m.foot;document.getElementById('mObject').innerHTML=objectHTML(m);document.getElementById('dots').innerHTML=memories.map((_,i)=>`<i class="${i===current?'active':''}"></i>`).join('')}
+function openMemory(i=0){current=(i+memories.length)%memories.length;renderMemory();sound('open');teaStage.classList.add('opening');setTimeout(()=>{document.body.classList.add('memory-open');requestAnimationFrame(()=>document.body.classList.add('memory-visible'))},280)}
+function closeMemory(){document.body.classList.remove('memory-visible');sound();setTimeout(()=>document.body.classList.remove('memory-open'),400);teaStage.classList.remove('opening')}
+function next(){current=(current+1)%memories.length;renderMemory();sound()};function prev(){current=(current-1+memories.length)%memories.length;renderMemory();sound()}
+openTea.onclick=()=>openMemory(0);document.getElementById('closeMemory').onclick=closeMemory;document.getElementById('nextMemory').onclick=next;document.getElementById('prevMemory').onclick=prev;
+view.addEventListener('click',e=>{if(e.target===view)closeMemory()});document.addEventListener('keydown',e=>{if(!document.body.classList.contains('memory-open'))return;if(e.key==='Escape')closeMemory();if(e.key==='ArrowRight')next();if(e.key==='ArrowLeft')prev()});
+const grid=document.getElementById('archiveGrid');grid.innerHTML=memories.map((m,i)=>`<button class="archive-item" onclick="openMemory(${i})"><div class="archive-num">${m.id}</div><h4>${m.title}</h4><p>${m.short}</p></button>`).join('');
+document.querySelector('.open-label small').textContent=`there are ${memories.length} things inside`;
+document.querySelector('.archive-head p').textContent=`${memories.length} pieces · 0 forced nostalgia`;
+let mx=0,my=0,rx=0,ry=0;const hasFineCursor=window.matchMedia('(min-width:901px)').matches;if(hasFineCursor){document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY});function cursor(){rx+=(mx-rx)*.14;ry+=(my-ry)*.14;document.getElementById('cursor').style.left=mx+'px';document.getElementById('cursor').style.top=my+'px';document.getElementById('cursorRing').style.left=rx+'px';document.getElementById('cursorRing').style.top=ry+'px';requestAnimationFrame(cursor)}cursor()}document.querySelectorAll('button').forEach(b=>{b.addEventListener('mouseenter',()=>document.body.classList.add('hovering'));b.addEventListener('mouseleave',()=>document.body.classList.remove('hovering'))});
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('on')}),{threshold:.12});document.querySelectorAll('.reveal').forEach(e=>io.observe(e));
+let n=0;const lc=document.getElementById('loadCount');const timer=setInterval(()=>{n+=Math.floor(Math.random()*13)+7;if(n>=100){n=100;clearInterval(timer);setTimeout(()=>document.body.classList.add('loaded'),350)}lc.textContent=String(n).padStart(2,'0')},55);
+</script>
+</body></html>
